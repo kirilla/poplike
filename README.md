@@ -1,9 +1,10 @@
 # poplike
 
 ## What is it? ##
-* A simple voting platform, with items to vote or comment on.
+* A simple voting website, with items to vote or comment on.
 * Items are grouped in categories.
 * Users can see a list of all existing items.
+* You can link to items from e.g. Facebook, to push traffic to a certain vote.
 
 ## Live examples ##
 * [poplike.se](https://poplike.se)
