@@ -15,7 +15,8 @@
 * Set up a SQL Server database and a user account for it.
 * Add config files Web/Config/Database.json and Email.json
 * Build the project with the "Local" config. (Similar to Debug.)
-* Add and initial database migration and run it to create a local database
+* Set the Web project as the Startup Project, e.g. by right-clicking on the Web project file in Visual Studio and selection that option.
+* Add an initial database migration (by running 'add-migration Init' in the package manager console, with 'Persistence' as the default project), then run it to create a local database ('update-database')
 * Try to run the web application locally, with the "Local" build configuration.
 * Build the project with the "Remote" config.
 * Run the database migration to create the production database.
