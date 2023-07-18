@@ -6,8 +6,8 @@
 * Users can see a list of all existing items.
 
 ## Live examples ##
-* [poplike.se](https://poplike.se)
-* [tyckomuppsala.se](https://tyckomuppsala.se)
+* [poplike.se](https://poplike.se) 🇬🇧
+* [tyckomuppsala.se](https://tyckomuppsala.se) 🇸🇪
 
 ## Getting started ##
 * Find a web host with support for ASP.net Core and SQL Server
