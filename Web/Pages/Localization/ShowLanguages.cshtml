@@ -1,0 +1,67 @@
+﻿@page "/language/all"
+@model ShowLanguagesModel
+@{
+}
+
+@section Meta {
+    <title>
+        Språk - 
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="Navbar/_Navbar" model="Model.PageUserToken" />
+}
+
+<main class="container">
+    <div class="row">
+        <div class="col-12 col-lg-10 col-xl-8 col-xxl-6">
+
+            <h4 class="ms-2 mt-3 mb-3">
+                <i>språk</i>
+            </h4>
+
+            <div class="card">
+                <table class="table mb-0">
+                    <thead>
+                        <tr>
+                            <th class="col-6">
+                                <span class="ms-2">
+                                    Språk
+                                </span>
+                            </th>
+                            <th class="col-6">
+                                Kultur
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var language in Model.Languages)
+                        {
+                            <tr>
+                                <td>
+                                    <span class="ms-2">
+                                        <a href="/language/show/@(language.Id)" 
+                                           class="text-decoration-none">@(language.Name)</a>
+                                    </span>
+                                </td>
+                                <td>
+                                    <a href="/language/show/@(language.Id)"
+                                       class="text-decoration-none">@(language.Culture)</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                
+                <div class="list-group list-group-flush border-0">
+                    <a class="list-group-item"
+                       href="/language/add">➕</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</main>

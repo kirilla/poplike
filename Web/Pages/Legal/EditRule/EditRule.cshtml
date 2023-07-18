@@ -1,0 +1,68 @@
+﻿@page "/rule/edit/{id:int}"
+@model EditRuleModel
+@{
+}
+
+@section Meta {
+    <title>
+        Redigera ord - 
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="Navbar/_Navbar" model="Model.PageUserToken" />
+}
+
+<main class="container">
+    <div class="row">
+        <div class="col-12 col-md-6">
+
+            <h4 class="ms-2 mt-3 mb-3">
+                <i>
+                    redigera ordet
+                    <span class="text-decoration-underline">
+                        @(Model.Rule.Heading)
+                    </span>
+                </i>
+            </h4>
+
+            <form method="post" role="form">
+
+                <input type="hidden" asp-for="CommandModel.Id" />
+
+                <label asp-for="CommandModel.Number" class="form-label ms-2">
+                    Nummer
+                </label>
+
+                <input asp-for="CommandModel.Number" class="form-control" />
+
+                <label asp-for="CommandModel.Heading" class="form-label mt-3 ms-2">
+                    Regel
+                </label>
+
+                <input asp-for="CommandModel.Heading" class="form-control" />
+
+                <label asp-for="CommandModel.Text" class="form-label mt-3 ms-2">
+                    Förklaring
+                </label>
+                
+                <textarea asp-for="CommandModel.Text" class="form-control" rows="4"></textarea>
+
+                <div asp-validation-summary="All"></div>
+
+                <div class="mt-4">
+                    <a class="btn btn-outline-secondary me-2"
+                       href="/legal/rules">
+                        Avbryt
+                   </a>
+
+                    <button type="submit" class="btn btn-secondary me-2">
+                        Spara
+                    </button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</main>

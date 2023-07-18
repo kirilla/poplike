@@ -1,0 +1,103 @@
+﻿@page "/settings"
+@model SettingsModel
+@{
+}
+
+@section Meta {
+    <title>
+        Inställningar - 
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Style {
+
+}
+
+@section Header {
+    <partial name="Navbar/_Navbar" model="Model.PageUserToken" />
+}
+
+<main class="container">
+    <div class="row">
+        <div class="col-12 col-lg-6 col-xxl-4">
+
+            <h4 class="ms-2 mt-3 mb-3">
+                <i>
+                    inställningar
+                </i>
+            </h4>
+
+            <div class="list-group mt-3">
+                @if (Model.UserToken.IsAdmin)
+                {
+                    <a href="/admin/routines"
+                       class="list-group-item list-group-item-action">
+                        <span class="list-group-icon-long">
+                            🪄
+                        </span>
+                        <span class="list-group-label ms-1">
+                            admin-rutiner
+                        </span>
+                    </a>
+                }
+
+                @if (Model.UserToken.IsAdmin ||
+                    Model.UserToken.IsModerator)
+                {
+                    <a href="/legal/words"
+                       class="list-group-item list-group-item-action">
+                        <span class="list-group-icon-long">
+                            🤬
+                        </span>
+                        <span class="list-group-label ms-1">
+                            förbjudna ord
+                        </span>
+                    </a>
+                }
+
+                <a href="/legal/rules"
+                   class="list-group-item list-group-item-action">
+                    <span class="list-group-icon-long">
+                        ⚖️
+                    </span>
+                    <span class="list-group-label ms-1">
+                        regler
+                    </span>
+                </a>
+
+                @if (Model.UserToken.IsCurator)
+                {
+                    <a href="/expressionset/all"
+                       class="list-group-item list-group-item-action">
+                        <span class="list-group-icon-long">
+                            👍🏼👎🏼
+                        </span>
+                        <span class="list-group-label ms-1">
+                            svarsalternativ
+                        </span>
+                    </a>
+                }
+
+            </div>
+
+            <div class="list-group mt-3">
+
+                @if (Model.UserToken.IsAdmin)
+                {
+                    <a href="/language/all"
+                       class="list-group-item list-group-item-action">
+                        <span class="list-group-icon-long">
+                            🌐
+                        </span>
+                        <span class="list-group-label ms-1">
+                            språk
+                        </span>
+                    </a>
+                }
+
+            </div>
+
+        </div>
+    </div>
+</main>

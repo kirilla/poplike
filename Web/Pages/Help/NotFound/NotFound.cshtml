@@ -1,0 +1,37 @@
+﻿@page "/help/notfound"
+@model NotFoundModel
+@{
+}
+
+@section Meta {
+    <title>
+        Hittar inte - 
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="Navbar/_Navbar" model="Model.PageUserToken" />
+}
+
+<main class="container">
+
+    <h4 class="ms-2 mt-3 mb-3">
+        den som söker ska finna - men inte just nu
+    </h4>
+
+    <div class="row">
+        <div class="col-12 col-lg-6">
+            <div class="alert alert-info" role="alert">
+                Det gick inte att hitta den där grejen.
+            </div>
+        </div>
+    </div>
+
+    <p class="mt-3">
+        <a href="/">
+            Till startsidan
+        </a>
+    </p>
+
+</main>

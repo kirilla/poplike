@@ -1,0 +1,71 @@
+﻿@page "/subject/changeExpressionSet/{id:int}"
+@model ChangeSubjectExpressionSetModel
+@{
+}
+
+@section Meta {
+    <title>
+        Byt svarsalternativ - 
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="Navbar/_Navbar" model="Model.PageUserToken" />
+}
+
+<main class="container">
+    <div class="col-12 col-md-6">
+
+        <h4 class="ms-2 mt-3 mb-3">
+            <i>
+                byt svarsalternativ för @(Model.Subject.Name)?
+            </i>
+        </h4>
+        
+        <form method="post" role="form">
+
+            <input type="hidden" asp-for="CommandModel.SubjectId" />
+
+            <label asp-for="CommandModel.ExpressionSetId" class="form-label ms-2" >
+                Byt till
+            </label>
+
+            <select asp-for="CommandModel.ExpressionSetId" class="form-control">
+                <option value="">–</option>
+                @foreach (var set in Model.ExpressionSets)
+                {
+                    <option value="@(set.Id)">
+                        @(set.Emoji)
+                        @(set.Name)
+                    </option>
+                }
+            </select>
+
+            <div class="form-check noselect ms-2 mt-3">
+                <input asp-for="CommandModel.Confirmed" class="form-check-input" type="checkbox" />
+                <label class="form-check-label" for="CommandModel_Confirmed">
+                    Ja, jag är säker
+                </label>
+            </div>
+
+            <div class="alert alert-warning mt-3">
+                Alla tidigare svar kommer att tas bort.
+            </div>
+
+            <div asp-validation-summary="All"></div>
+
+            <div class="mt-2">
+                <a role="button" class="btn btn-secondary me-2"
+                   href="/subject/curate/@(Model.CommandModel.SubjectId)">
+                    Avbryt
+                </a>
+
+                <button type="submit" class="btn btn-danger me-2">
+                    Byt
+                </button>
+            </div>
+
+        </form>
+    </div>
+</main>

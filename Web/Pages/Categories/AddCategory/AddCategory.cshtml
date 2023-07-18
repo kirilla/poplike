@@ -1,0 +1,119 @@
+﻿@page "/category/add"
+@model AddCategoryModel
+@{
+}
+
+@section Meta {
+    <title>
+        Lägg till kategori -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="Navbar/_Navbar" model="Model.PageUserToken" />
+}
+
+<main class="container">
+    <div class="row">
+        <div class="col-12 col-md-6">
+
+            <h4 class="ms-2 mt-3 mb-3">
+                <i>
+                    lägg till en kategori
+                </i>
+            </h4>
+
+            <form method="post" role="form">
+
+                <div class="card">
+                    <div class="card-body">
+
+                        <label asp-for="CommandModel.Name"
+                               class="form-label">
+                            Kategori
+                        </label>
+
+                        <input asp-for="CommandModel.Name" class="form-control"
+                               placeholder="ex: bibliotek, katthem, ..." />
+
+                        <label asp-for="CommandModel.Emoji"
+                               class="form-label mt-3">
+                            Symbol
+                        </label>
+
+                        <input asp-for="CommandModel.Emoji" class="form-control"
+                               placeholder="en passande emoji eller symbol" />
+
+                        <label asp-for="CommandModel.ExpressionSetId"
+                               class="form-label mt-3">
+                               Svarsalternativ
+                        </label>
+
+                        <select asp-for="CommandModel.ExpressionSetId" class="form-control">
+                            <option value="">–</option>
+                            @foreach (var set in Model.ExpressionSets)
+                            {
+                                <option value="@(set.Id)">
+                                    @(set.Emoji)
+                                    @(set.Name)
+                                </option>
+                            }
+                        </select>
+
+                        @if (!Model.ExpressionSets.Any())
+                        {
+                            <div class="alert alert-warning mt-3 mb-0">
+                                Det saknas svarsalternativ att välja.
+                                <a href="/expressionset/all" class="alert-link">
+                                    Lägg till?
+                                </a>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                <h5 class="mt-4 ms-2">
+                    <i>
+                        texter i dialogen "lägg till"
+                    </i>
+                </h5>
+
+                <div class="card">
+                    <div class="card-body">
+                        <label asp-for="CommandModel.SubjectHeading"
+                               class="form-label">
+                            Rubriken
+                        </label>
+
+                        <input asp-for="CommandModel.SubjectHeading"
+                               class="form-control"
+                               placeholder="ex: lägg till en ..." />
+
+                        <label asp-for="CommandModel.SubjectPlaceholder"
+                               class="form-label mt-3">
+                            Inmatningsfältet
+                        </label>
+
+                        <input asp-for="CommandModel.SubjectPlaceholder"
+                               class="form-control"
+                               placeholder="ex: namnet på din ..." />
+                    </div>
+                </div>
+
+                <div asp-validation-summary="All" class="text-danger mt-2"></div>
+
+                <div class="mt-3">
+                    <a class="btn btn-outline-secondary me-2" 
+                       href="/subject/all">Avbryt
+                    </a>
+
+                    <button type="submit" class="btn btn-secondary ms-auto">
+                        Lägg till
+                    </button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</main>

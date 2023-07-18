@@ -1,0 +1,87 @@
+﻿@page "/account/showaccount/"
+@model ShowAccountModel
+@{
+}
+
+@section Meta {
+    <title>
+        Ditt konto - 
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="Navbar/_Navbar" model="Model.PageUserToken" />
+}
+
+<main class="container">
+    <div class="row">
+        <div class="col-12 col-md-10 col-lg-8 col-xl-6">
+
+            <h4 class="ms-2 mt-3 mb-3">
+                <i>
+                    ditt konto
+                </i>
+            </h4>
+
+            <div class="card">
+                <div class="card-body">
+
+                    <dl class="row">
+                        <dt class="col-3">
+                            Namn
+                        </dt>
+                        <dd class="col-9">@Model.User.Name</dd>
+
+                        <dt class="col-3">
+                            Epostadress
+                        </dt>
+                        <dd class="col-9">@Model.User.EmailAddress</dd>
+
+                        <dt class="col-3">
+                            Konto skapat
+                        </dt>
+                        <dd class="col-9">@(Model.User.Created?.ToFixedFormatDate() ?? "–")</dd>
+
+                        <dt class="col-3">
+                            Synlighet
+                        </dt>
+                        <dd class="col-9">
+                            @if (Model.User.IsHidden)
+                            {
+                                <span>
+                                    Dolt konto
+                                </span>
+                            }
+                            else
+                            {
+                                <span>
+                                    Publikt konto
+                                </span>
+                            }
+                        </dd>
+                    </dl>
+
+                    <div class="mt-3">
+
+                        <a class="btn btn-danger me-2" 
+                            href="/account/deleteaccount/">
+                            Ta bort
+                        </a>
+
+                        <a class="btn btn-secondary me-2" 
+                            href="/account/editaccount/">
+                            Ändra
+                        </a>
+
+                        <a class="btn btn-secondary me-2"
+                           href="/account/changepassword/">
+                            Byt lösenord
+                       </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

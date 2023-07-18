@@ -1,0 +1,67 @@
+﻿@page "/user/editroles/{id:int}"
+@model EditUserRolesModel
+@{
+}
+
+@section Meta {
+    <title>
+        Redigera användarroller - 
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="Navbar/_Navbar" model="Model.PageUserToken" />
+}
+
+<main class="container">
+    <div class="col-12 col-md-6">
+
+        <h4 class="ms-2 mt-3 mb-3">
+            <i>
+                redigera användarroller för
+                <span class="text-decoration-underline">@(Model.User.Name)</span>
+            </i>
+        </h4>
+
+        <form method="post" role="form">
+
+            <input type="hidden" asp-for="CommandModel.UserId" />
+
+            <div class="form-check noselect ms-2 mt-3">
+                <input asp-for="CommandModel.IsAdmin" class="form-check-input" type="checkbox" />
+                <label asp-for="CommandModel.IsAdmin" class="form-check-label">
+                    Administratör
+                </label>
+            </div>
+
+            <div class="form-check noselect ms-2 mt-3">
+                <input asp-for="CommandModel.IsModerator" class="form-check-input" type="checkbox" />
+                <label asp-for="CommandModel.IsModerator" class="form-check-label">
+                    Moderator
+                </label>
+            </div>
+
+            <div class="form-check noselect ms-2 mt-3">
+                <input asp-for="CommandModel.IsCurator" class="form-check-input" type="checkbox" />
+                <label asp-for="CommandModel.IsCurator" class="form-check-label">
+                    Innehållsansvarig
+                </label>
+            </div>
+
+            <div asp-validation-summary="All" class="col-12"></div>
+
+            <div class="mt-2">
+                <a class="btn btn-outline-secondary me-2" 
+                   href="/user/show/@(Model.CommandModel.UserId)">
+                    Avbryt
+                </a>
+
+                <button type="submit" class="btn btn-secondary">
+                    Spara
+                </button>
+            </div>
+
+        </form>
+    </div>
+</main>

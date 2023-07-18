@@ -1,0 +1,76 @@
+﻿@page "/subject/edit/{id:int}"
+@model EditSubjectModel
+@{
+}
+
+@section Meta {
+    <title>
+        Redigera ämne - 
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="Navbar/_Navbar" model="Model.PageUserToken" />
+}
+
+<main class="container">
+    <div class="row">
+        <div class="col-12 col-md-6">
+
+            <h4 class="ms-2 mt-3 mb-2">
+                <i>
+                    redigera ämnet
+                </i>
+                
+                <span class="ms-2" style="font-size:smaller">
+                    <a href="/subject/show/@(Model.Subject.Id)"
+                       class="text-decoration-none">
+                        @(Model.Subject.Category.Emoji)
+                        @(Model.Subject.Name)
+                    </a>
+                </span>
+            </h4>
+
+            <form method="post" role="form">
+
+                <input type="hidden" asp-for="CommandModel.Id" />
+
+                <label asp-for="CommandModel.Name" class="form-label mt-3 ms-2">
+                    Ämne
+                </label>
+
+                <input asp-for="CommandModel.Name" class="form-control"
+                       placeholder="ämnets namn" />
+
+                <div class="form-check noselect ms-2 mt-3">
+                    <input asp-for="CommandModel.MultipleChoice" class="form-check-input" type="checkbox" />
+                    <label asp-for="CommandModel.MultipleChoice" class="form-check-label">
+                        Tillåt flera val
+                    </label>
+                </div>
+
+                <div class="form-check noselect ms-2 mt-3">
+                    <input asp-for="CommandModel.FreeExpression" class="form-check-input" type="checkbox" />
+                    <label asp-for="CommandModel.FreeExpression" class="form-check-label">
+                        Tillåt egna svar
+                    </label>
+                </div>
+
+                <div asp-validation-summary="All" class="col-12"></div>
+
+                <div class="mt-4">
+                    <a class="btn btn-outline-secondary me-2"
+                       href="/subject/curate/@(Model.CommandModel.Id)">
+                        Avbryt
+                    </a>
+
+                    <button type="submit" class="btn btn-secondary ms-auto">
+                        Spara
+                    </button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</main>

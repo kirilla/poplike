@@ -1,0 +1,161 @@
+﻿@page "/"
+@model IndexModel
+@{
+}
+
+@section Meta {
+    <title>@(Branding.WebsiteTitle)</title>
+    <meta name="description" content="@(Branding.WebsiteTitleShort)">
+    <meta name="keywords" content="@(Branding.WebsiteTitleShort)">
+}
+
+@section Style {
+
+}
+
+@section Header {
+    <partial name="Navbar/_Navbar" model="Model.PageUserToken" />
+}
+
+<main class="container">
+    <div class="row">
+        <div class="col-12 col-lg-6 col-xxl-4">
+
+            <h4 class="ms-2 mt-3 mb-3">
+                <i>
+                    <a href="/subject/new" 
+                       class="text-decoration-none">
+                        nytt
+                    </a>
+                </i>
+                @*<span class="small">✨</span>*@
+            </h4>
+
+            <div class="list-group mt-3">
+                @foreach (var subject in Model.NewSubjects)
+                {
+                    <a href="/subject/show/@(subject.Id)"
+                       class="list-group-item list-group-item-action d-flex justify-content-between">
+                        <div>
+                            <span class="list-group-icon">
+                                @(subject.GroupEmoji)
+                            </span>
+                            <span class="list-group-label ms-1" >
+                                @(subject.SubjectName)
+                            </span>
+                        </div>
+                        <div>
+                            <span class="text-muted pull-end">
+                                @(subject.SubjectCreated?.ToFixedFormatDate() ?? "–")
+                            </span>
+                        </div>
+                    </a>
+                }
+
+                @if (!Model.NewSubjects.Any())
+                {
+                    <a href="#"
+                       class="list-group-item list-group-item-action">
+                        <div>
+                            <span class="list-group-icon">
+                                @(Branding.WebsiteEmoji)
+                            </span>
+                            <span class="list-group-label ms-1" >
+                                Det finns inga ämnen än.
+                            </span>
+                        </div>
+                        <div>
+                            <span class="text-muted pull-end">
+                                @*datum*@
+                            </span>
+                        </div>
+                    </a>
+                }
+            </div>
+
+        </div>
+
+        <div class="col-12 col-lg-6 col-xxl-4">
+
+            <h4 class="ms-2 mt-3 mb-3">
+                <i>
+                    <a href="/subject/popular"
+                       class="text-decoration-none">
+                        populärt
+                    </a>
+                </i>
+                @*<span class="small">🔥</span>*@
+            </h4>
+
+            <div class="list-group mt-3">
+                @foreach (var subject in Model.PopularSubjects)
+                {
+                    <a href="/subject/show/@(subject.Id)"
+                       class="list-group-item list-group-item-action d-flex justify-content-between">
+                        <div>
+                            <span class="list-group-icon">
+                                @(subject.GroupEmoji)
+                            </span>
+                            <span class="list-group-label ms-1" >
+                                @(subject.SubjectName)
+                            </span>
+                        </div>
+                        <div>
+                            <span class="text-muted pull-end">
+                                @(subject.StatementCount.ToString("N0"))
+                                reaktioner
+                            </span>
+                        </div>
+                    </a>
+                }
+
+                @if (!Model.PopularSubjects.Any())
+                {
+                    <a href="#"
+                       class="list-group-item list-group-item-action">
+                        <span class="list-group-icon">
+                            @(Branding.WebsiteEmoji)
+                        </span>
+                        <span class="list-group-label ms-1" >
+                            Det finns inga ämnen än.
+                        </span>
+                    </a>
+                }
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="row pt-2">
+        <div class="col-12 col-lg-6">
+
+            <h4 class="ms-2 mt-3 mb-3">
+                <i>reaktioner</i>
+                @*<span class="small">⚡</span>*@
+            </h4>
+
+            <ul class="list-unstyled mt-3">
+                @foreach (var statement in Model.UserSubjectStatements)
+                {
+                    <li>
+                        @*NOTE: This composition is bad for localization*@
+                        <a href="/user/show/@statement.UserId">@statement.UserName</a>
+                        om
+                        <a href="/subject/show/@statement.SubjectId">@statement.SubjectName</a>
+                        <span class="text-muted">@statement.Created.ToFixedFormatDate()</span>
+                        @statement.Sentence
+                    </li>
+                }
+
+                @if (!Model.UserSubjectStatements.Any())
+                {
+                    <li>
+                        Det finns inga reaktioner än.
+                    </li>
+                }
+            </ul>
+
+        </div>
+    </div>
+</main>

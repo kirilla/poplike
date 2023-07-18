@@ -1,0 +1,74 @@
+﻿@page "/subject/add/{id:int}"
+@model AddSubjectModel
+@{
+}
+
+@section Meta {
+    <title>
+        Nytt ämne - 
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="Navbar/_Navbar" model="Model.PageUserToken" />
+}
+
+<main class="container">
+    <div class="col-12 col-sm-9 col-md-7 col-lg-5">
+
+        <h4 class="ms-2 mt-3 mb-3">
+            @(Model.Category.Emoji)
+            <i>
+                @(Model.Category.SubjectHeading)
+            </i>
+        </h4>
+
+        <div class="card">
+            <div class="card-body">
+
+                <form method="post" role="form">
+                    <input type="hidden" asp-for="CommandModel.CategoryId" />
+
+                    <label asp-for="CommandModel.Name" class="form-label ms-2">
+                        Namn
+                    </label>
+
+                    <input asp-for="CommandModel.Name" class="form-control"
+                           placeholder="@(Model.Category.SubjectPlaceholder)" />
+
+                    <label asp-for="CommandModel.ExpressionSetId"
+                           class="form-label mt-3 ms-2">
+                        Svarsalternativ
+                    </label>
+
+                    <select asp-for="CommandModel.ExpressionSetId" class="form-control">
+                        <option value="">–</option>
+                        @foreach (var set in Model.ExpressionSets)
+                        {
+                            <option value="@(set.Id)">
+                                @(set.Emoji)
+                                @(set.Name)
+                            </option>
+                        }
+                    </select>
+
+                    <div asp-validation-summary="All"></div>
+
+                    <div class="mt-4">
+                        <a class="btn btn-outline-secondary me-2"
+                           href="/category/show/@(Model.CommandModel.CategoryId)">
+                            Avbryt
+                        </a>
+
+                        <button type="submit" class="btn btn-primary">
+                            Lägg till
+                        </button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</main>

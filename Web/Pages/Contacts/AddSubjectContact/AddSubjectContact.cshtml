@@ -1,0 +1,66 @@
+﻿@page "/subject/{id:int}/addcontact"
+@model AddSubjectContactModel
+@{
+}
+
+@section Meta {
+    <title>
+        Ny kontakt - 
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="Navbar/_Navbar" model="Model.PageUserToken" />
+}
+
+<main class="container">
+    <div class="row">
+        <div class="col-12 col-md-6">
+
+            <h4 class="ms-2 mt-3 mb-3">
+                <i>
+                    lägg till en kontakt
+                </i>
+
+                <span class="ms-2" style="font-size:smaller">
+                    <a href="/subject/curate/@(Model.Subject.Id)"
+                       class="text-decoration-none">
+                        @(Model.Subject.Category.Emoji)
+                        @(Model.Subject.Name)
+                    </a>
+                </span>
+            </h4>
+
+            <form method="post" role="form">
+                <input type="hidden" asp-for="CommandModel.SubjectId" />
+
+                <div asp-validation-summary="All" class="col-12"></div>
+
+                <input asp-for="CommandModel.Name" class="form-control mt-3"
+                       placeholder="Namn" />
+
+                <input asp-for="CommandModel.PhoneNumber" class="form-control mt-3"
+                       placeholder="Telefonnummer" />
+
+                <input asp-for="CommandModel.EmailAddress" class="form-control mt-3"
+                       placeholder="Epostadress" />
+
+                <input asp-for="CommandModel.Url" class="form-control mt-3"
+                       placeholder="http://www.hejhej.se/glassbil" />
+
+                <div class="mt-3">
+                    <a class="btn btn-outline-secondary me-2"
+                       href="/subject/curate/@(Model.Subject.Id)">
+                        Avbryt
+                    </a>
+
+                    <button type="submit" class="btn btn-secondary ms-auto">
+                        Lägg till
+                    </button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</main>

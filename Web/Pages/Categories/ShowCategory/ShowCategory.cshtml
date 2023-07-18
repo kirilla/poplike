@@ -1,0 +1,75 @@
+﻿@page "/category/show/{id:int}"
+@model ShowCategoryModel
+@{
+}
+
+@section Meta {
+    <title>@(Model.Category.Name) - @(Branding.WebsiteTitle)</title>
+}
+
+@section Header {
+    <partial name="Navbar/_Navbar" model="Model.PageUserToken" />
+}
+
+<main class="container">
+    <div class="row">
+        <div class="col-12 col-md-8">
+
+            <h4 class="ms-2 mt-3 mb-3">
+                <i>
+                    @(Model.Category.Name)
+                </i>
+                <span class="ms-2" style="font-size:smaller">
+                    <a href="/subject/all"
+                       class="text-decoration-none">
+                        ämnen
+                    </a>
+                </span>
+            </h4>
+
+            <div class="mt-3 col-12 col-md-8">
+
+                <div class="list-group">
+                    @foreach (var subject in Model.Subjects)
+                    {
+                        <a href="/subject/show/@(subject.Id)"
+                           class="list-group-item list-group-item-action">
+                            <span class="list-group-icon">
+                                @(Model.Category.Emoji)
+                            </span>
+                            <span class="list-group-label ms-1">
+                                @(subject.Name)
+                            </span>
+                        </a>
+                    }
+                </div>
+
+                @if (Model.UserToken.IsCurator)
+                {
+                    <div class="list-group mt-4">
+                        <a href="/category/curate/@(Model.Category.Id)"
+                           class="list-group-item list-group-item-action">
+                            <span class="list-group-icon">
+                                ✏️
+                            </span>
+                            <span class="list-group-label ms-1">
+                                redigera kategorin
+                            </span>
+                        </a>
+                        <a href="/subject/add/@(Model.Category.Id)"
+                           class="list-group-item list-group-item-action">
+                            <span class="list-group-icon">
+                                ➕
+                            </span>
+                            <span class="list-group-label ms-1">
+                                @(Model.Category.SubjectHeading)
+                            </span>
+                        </a>
+                    </div>
+                }
+
+            </div>
+
+        </div>
+    </div>
+</main>

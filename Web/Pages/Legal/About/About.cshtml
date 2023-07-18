@@ -1,0 +1,52 @@
+﻿@page "/about/this"
+@model AboutModel
+@{
+}
+
+@section Meta {
+    <title>
+        Om den här sajten - 
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="Navbar/_Navbar" model="Model.PageUserToken" />
+}
+
+<main class="container">
+    <div class="row">
+        <div class="col-12 col-md-8">
+
+            <h4 class="ms-2 mt-3 mb-3">
+                <i>
+                    om den här sajten
+                </i>
+            </h4>
+
+            <div class="card">
+                <div class="card-body">
+
+                    <h5 class="mt-0">
+                        Vem står bakom sidan?
+                    </h5>
+
+                    <p>
+                        Kanske du?
+                    </p>
+
+                    <h5 class="mt-0">
+                        Vad är syftet med sidan?
+                    </h5>
+
+                    <p>
+                        Det får vi se.
+                    </p>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</main>

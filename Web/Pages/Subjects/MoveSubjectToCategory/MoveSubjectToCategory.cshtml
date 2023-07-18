@@ -1,0 +1,66 @@
+﻿@page "/subject/move/{id:int}"
+@model MoveSubjectToCategoryModel
+@{
+}
+
+@section Meta {
+    <title>
+        Flytta ämne till kategori - 
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="Navbar/_Navbar" model="Model.PageUserToken" />
+}
+
+<main class="container">
+    <div class="row">
+        <div class="col-12 col-md-6">
+
+            <h4 class="ms-2 mt-3 mb-2">
+                <i>
+                    flytta ämnet
+                </i>
+                
+                <span class="ms-2" style="font-size:smaller">
+                    <a href="/subject/show/@(Model.Subject.Id)"
+                       class="text-decoration-none">
+                        @(Model.Subject.Category.Emoji)
+                        @(Model.Subject.Name)
+                    </a>
+                </span>
+            </h4>
+
+            <form method="post" role="form">
+
+                <input type="hidden" asp-for="CommandModel.Id" />
+
+                <label asp-for="CommandModel.CategoryId" class="form-label mt-3 ms-2">
+                    till kategorin
+                </label>
+
+                <select asp-for="CommandModel.CategoryId" class="form-control">
+                    @foreach (var category in Model.Categories)
+                    {
+                        <option value="@(category.Id)">@(category.Name)</option>
+                    }
+                </select>
+
+                <div asp-validation-summary="All" class="col-12"></div>
+
+                <div class="mt-4">
+                    <a class="btn btn-outline-secondary me-2"
+                       href="/subject/curate/@(Model.CommandModel.Id)">
+                        Avbryt
+                    </a>
+
+                    <button type="submit" class="btn btn-secondary ms-auto">
+                        Flytta
+                    </button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</main>

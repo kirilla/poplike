@@ -1,0 +1,31 @@
+﻿@page "/help/notpermitted"
+@model NotPermittedModel
+@{
+}
+
+@section Meta {
+    <title>
+        Något gick inte - 
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="Navbar/_Navbar" model="Model.PageUserToken" />
+}
+
+<main class="container">
+
+    <h4 class="ms-2 mt-3 mb-3">
+        fel fel fel
+    </h4>
+
+    <div class="row">
+        <div class="col-12 col-lg-6">
+            <div class="alert alert-info" role="alert">
+                Det gick inte att göra den där grejen.
+            </div>
+        </div>
+    </div>
+
+</main>

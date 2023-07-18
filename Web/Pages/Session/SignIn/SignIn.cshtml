@@ -1,0 +1,64 @@
+﻿@page "/session/signin"
+@model SignInModel
+@{
+}
+
+@section Meta {
+    <title>
+        Logga in? - 
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="Navbar/_Navbar" model="Model.PageUserToken" />
+}
+
+<main class="container">
+    <div class="col-12 col-md-6">
+
+        <h4 class="ms-2 mt-3 mb-3">
+            <i>
+                logga in
+            </i>
+        </h4>
+
+        <form method="post" role="form" class="mt-1">
+
+            <input asp-for="CommandModel.Email" class="form-control"
+                   placeholder="Epostadress" />
+
+            <input asp-for="CommandModel.Password" class="form-control mt-3"
+                   type="password" placeholder="Lösenord" />
+
+            <div asp-validation-summary="All"></div>
+
+            <input type="submit" class="btn btn-primary mt-2"
+                   value="Logga in" />
+
+        </form>
+
+        <div class="alert alert-info mt-3">
+            <div class="mb-1">😦 Inget konto?
+            </div>
+            <a href="/account/signup">Skaffa ett konto nu
+            </a>
+        </div>
+
+        <div class="alert alert-info">
+            <div class="mb-1">😖 Glömt lösenordet?
+            </div>
+            <a href="/account/requestpasswordreset">
+                Begär återställning
+            </a>
+        </div>
+
+        <div class="alert alert-info">
+            <div class="mb-1">🍪 Om kakor
+            </div>
+            Sajten använder två kakor, för inloggning och för säkerhet.
+            Det går inte att välja bort dem.
+        </div>
+
+    </div>
+</main>

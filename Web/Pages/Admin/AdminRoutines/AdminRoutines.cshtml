@@ -1,0 +1,34 @@
+﻿@page "/admin/routines"
+@model AdminRoutinesModel
+@{
+}
+
+@section Meta {
+    <title>
+        Admin-rutiner - 
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="Navbar/_Navbar" model="Model.PageUserToken" />
+}
+
+<main class="container">
+    <div class="col-12 col-lg-10 col-xl-8 col-xxl-6">
+
+        <h4 class="ms-2 mt-3 mb-3">
+            <i>
+                admin-rutiner
+            </i>
+        </h4>
+
+        <div class="list-group">
+            <a href="/admin/createDefaultExpressions" 
+               class="list-group-item list-group-item-action">
+                Skapa en grunduppsättning av svarsalternativ
+           </a>
+        </div>
+
+    </div>
+</main>

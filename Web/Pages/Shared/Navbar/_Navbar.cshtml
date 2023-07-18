@@ -1,0 +1,168 @@
+﻿@using Microsoft.AspNetCore.Localization;
+@using Poplike.Web.Pages.Shared.Navbar;
+@model PageUserToken
+@{
+}
+<div class="container">
+    <a class="logo" href="/">
+        <h4 class="ms-2 mt-3 mb-3">
+            <i>Poplike</i>
+            <span class="small">👍🏼</span>
+        </h4>
+    </a>
+</div>
+
+<div class="container">
+    <div class="btn-toolbar mt-2" role="toolbar">
+        <div class="btn-group me-2" role="group">
+            
+            @*<a class="btn btn-outline-secondary" href="/">
+                <span class="navbar-logo-label">@(Branding.WebsiteTitleShort)</span>
+                @(Branding.WebsiteEmoji)
+            </a>*@
+
+            <a class="btn btn-outline-secondary" href="/subject/all">
+                <span class="navbar-label">
+                    ämnen
+                </span>
+                <span class="">😏</span>
+            </a>
+
+            <a class="btn btn-outline-secondary" href="/search">
+                <span class="navbar-label">
+                    sök
+                </span>
+                <span class="">🔍</span>
+            </a>
+
+            @if (Model.UserToken.IsCurator)
+            {
+                <a class="btn btn-outline-secondary" href="/add/something">
+                    ➕
+                </a>
+            }
+            
+            <a class="btn btn-outline-secondary" href="/user/menu">
+                <span class="navbar-label">
+                    användare
+                </span>
+                <span class="">🫂</span>
+            </a>
+
+            @if (Model.UserToken.IsAdmin ||
+                Model.UserToken.IsModerator ||
+                Model.UserToken.IsCurator)
+            {
+                <a class="btn btn-outline-secondary" href="/settings">
+                    <span class="navbar-label">
+                        inställningar
+                    </span>
+                    <span class="">⚙️</span>
+                </a>
+            }
+
+            @if (Model.UserToken.IsAuthenticated)
+            {
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-outline-secondary dropdown-toggle"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="navbar-label">@(Model.UserToken.Name)</span>
+                        <span class="">👤</span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li>
+                            <a class="dropdown-item" href="/account/showaccount">
+                                Ditt konto
+                            </a>
+                        </li>
+                        <li class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item" href="/account/statements">
+                                Dina kommentarer
+                            </a>
+                        </li>
+                        <li class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item" href="/about/this">
+                                Om sajten
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="/legal/integrity">
+                                Integritet
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="/legal/rules">
+                                Regler
+                            </a>
+                        </li>
+                        <li class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item" href="/session/signout">
+                                Logga ut
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            }
+            else
+            {
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-outline-secondary dropdown-toggle"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="navbar-label">
+                            konto
+                        </span>
+                        <span class="">👤</span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li>
+                            <a class="dropdown-item" href="/session/signin">
+                                Logga in
+                            </a>
+                        </li>
+                        <li class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item" href="/about/this">
+                                Om sajten
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="/legal/integrity">
+                                Integritet
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="/legal/rules">
+                                Regler
+                            </a>
+                        </li>
+                        <li class="dropdown-divider"></li>
+                        @*<li>
+                            <a class="dropdown-item" href="/account/registeraccount">
+                                Skapa konto
+                            </a>
+                        </li>*@
+                        <li>
+                            <a class="dropdown-item" href="/account/signup">
+                                Skaffa konto
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            }
+        </div>
+
+        @*<div class="btn-group me-2" role="group">
+            <a class="btn btn-outline-secondary" href="/language">
+                <span class="navbar-label">
+                    språk
+                </span>
+                <span class="">
+                    🇸🇪
+                </span>
+            </a>
+        </div>*@
+    </div>
+</div>

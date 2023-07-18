@@ -1,0 +1,95 @@
+﻿@page "/user/show/{id:int}"
+@model ShowUserModel
+@{
+}
+
+@section Meta {
+    <title>@(Model.User.Name) - @(Branding.WebsiteTitle)</title>
+}
+
+@section Header {
+    <partial name="Navbar/_Navbar" model="Model.PageUserToken" />
+}
+
+<main class="container">
+    <div class="row">
+        <div class="col-12 col-md-6">
+
+            <h4 class="ms-2 mt-3 mb-3">
+                <i>@Model.User.Name</i>
+                <partial name="_UserEmoji" model="Model.User" />
+            </h4>
+
+            <div class="card mt-3">
+                <div class="card-body">
+
+                    <h5>
+                        Kommentarer
+                    </h5>
+                    <ul class="list-unstyled">
+                        @foreach (var statement in Model.UserStatements)
+                        {
+                            <li>
+                                @(statement.Statement.Sentence ?? "–")
+                                <a href="/subject/show/@statement.Statement.SubjectId">@statement.Statement.Subject.Name</a>
+                                <span class="text-muted">@statement.Created.ToFixedFormatDate()</span>
+                            </li>
+                        }
+
+                        @if (!Model.UserStatements.Any())
+                        {
+                            <li>–</li>
+                        }
+                    </ul>
+
+                </div>
+            </div>
+
+            @if (Model.UserToken.IsAdmin)
+            {
+                <div class="card mt-3">
+                    <div class="card-body">
+
+                        <h5>
+                            Administration
+                        </h5>
+
+                        <div class="text-muted">
+                            Konto skapat
+                            @(Model.User.Created?.ToFixedFormatDate() ?? "–")
+                        </div>
+
+                        <div class="mt-4">
+
+                            @if (Model.UserToken.CanDeleteUser())
+                            {
+                                <a class="btn btn-danger me-2"
+                                   href="/user/delete/@(Model.User.Id)">
+                                    Ta bort användaren
+                                </a>
+                            }
+
+                            @if (Model.UserToken.CanEditUser())
+                            {
+                                <a class="btn btn-secondary me-2"
+                                   href="/user/edit/@(Model.User.Id)">
+                                    Redigera namn
+                                </a>
+                            }
+
+                            @if (Model.UserToken.CanEditUserRoles())
+                            {
+                                <a class="btn btn-secondary me-2"
+                                   href="/user/editroles/@(Model.User.Id)">
+                                    Redigera roller
+                                </a>
+                            }
+                        </div>
+
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+</main>

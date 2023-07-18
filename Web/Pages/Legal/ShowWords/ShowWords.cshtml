@@ -1,0 +1,70 @@
+﻿@page "/legal/words"
+@model ShowWordsModel
+@{
+}
+
+@section Meta {
+    <title>
+        Förbjudna ord - 
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="Navbar/_Navbar" model="Model.PageUserToken" />
+}
+
+<main class="container">
+    <div class="row">
+        <div class="col-12 col-lg-10 col-xl-8 col-xxl-6">
+
+            <h4 class="ms-2 mt-3 mb-3">
+                <i>förbjudna ord</i>
+            </h4>
+
+            <div class="card">
+                <table class="table mb-0">
+                    <thead>
+                        <tr>
+                            <th class="col-8">
+                                <span class="ms-2">
+                                    Ord
+                                </span>
+                            </th>
+                            <th class="col-4"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var word in Model.Words)
+                        {
+                            <tr>
+                                <td>
+                                    <span class="ms-2">
+                                        @(word.Value)
+                                    </span>
+                                </td>
+                                <td class="text-end">
+                                    <a href="/word/edit/@(word.Id)"
+                                       class="text-decoration-none me-2">
+                                        <span>✏️</span>
+                                    </a>
+                                    <a href="/word/remove/@(word.Id)"
+                                       class="text-decoration-none me-2">
+                                        <span>❌</span>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                
+                <div class="list-group list-group-flush border-0">
+                    <a class="list-group-item"
+                       href="/word/add">➕</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</main>

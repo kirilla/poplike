@@ -1,0 +1,50 @@
+﻿@page "/language/show/{id:int}"
+@model ShowLanguageModel
+@{
+}
+
+@section Meta {
+    <title>
+        @(Model.Language.Name) - 
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="Navbar/_Navbar" model="Model.PageUserToken" />
+}
+
+<main class="container">
+    <div class="row">
+        <div class="col-12 col-lg-10 col-xl-8 col-xxl-6">
+
+            <h4 class="ms-2 mt-3 mb-3">
+                <i>
+                    @(Model.Language.Name)
+                </i>
+
+                <span class="ms-2" style="font-size:smaller">
+                    <a href="/language/all"
+                       class="text-decoration-none">
+                        språk
+                    </a>
+                </span>
+            </h4>
+
+            <div class="mt-3">
+
+                <a class="btn btn-danger me-2"
+                    href="/language/remove/@(Model.Language.Id)">
+                    Ta bort
+                </a>
+
+                <a class="btn btn-warning me-2"
+                    href="/language/edit/@(Model.Language.Id)">
+                    Redigera
+                </a>
+
+            </div>
+
+        </div>
+    </div>
+</main>

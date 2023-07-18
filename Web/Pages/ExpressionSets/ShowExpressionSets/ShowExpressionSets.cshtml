@@ -1,0 +1,56 @@
+﻿@page "/expressionset/all"
+@model ShowExpressionSetsModel
+@{
+}
+
+@section Meta {
+    <title>
+        Svarsalternativ -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="Navbar/_Navbar" model="Model.PageUserToken" />
+}
+
+<main class="container">
+    <div class="row">
+        <div class="col-12 col-md-8 col-xxl-6">
+
+            <h4 class="ms-2 mt-3 mb-3">
+                <i>
+                    svarsalternativ
+                </i>
+            </h4>
+
+            <div class="list-group">
+                @foreach (var set in Model.ExpressionSets)
+                {
+                    <a href="/expressionset/show/@(set.Id)"
+                       class="list-group-item list-group-item-action">
+                        <span class="list-group-icon">
+                            @(set.Emoji)
+                        </span>
+                        <span class="list-group-label ms-1">
+                            @(set.Name)
+                        </span>
+                    </a>
+                }
+            </div>
+
+            <div class="list-group mt-4">
+                <a href="/expressionset/add"
+                   class="list-group-item list-group-item-action">
+                    <span class="list-group-icon">
+                        ➕
+                    </span>
+                    <span class="list-group-label ms-1">
+                        nya svarsalternativ
+                    </span>
+                </a>
+            </div>
+
+        </div>
+    </div>
+</main>

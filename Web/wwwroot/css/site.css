@@ -1,0 +1,137 @@
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 10px;
+}
+
+.logo {
+    text-decoration: none;
+    color: black;
+}
+
+.noselect {
+    user-select: none;
+}
+
+.user-offline {
+    color: #817f7e;
+}
+
+.navbar-label {
+    display: none;
+}
+
+.navbar-logo-label {
+    display: none;
+}
+
+.subject-grid {
+    display: grid;
+    grid-template-columns: 100%;
+    gap: 0.3em;
+}
+
+.subject-grid-item {
+    min-width: 15em;
+    /*height: 10em;*/
+    border: 1px solid rgba(0,0,0,0.175);
+    border-radius: 0.375rem;
+    padding: 0.5rem;
+}
+
+@media (min-width: 576px) {
+
+    .subject-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 0.5em;
+    }
+}
+
+@media (min-width: 768px) {
+
+    .navbar-logo-label {
+        display: inline;
+    }
+
+    .subject-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 0.8em;
+    }
+}
+
+@media (min-width: 992px) {
+
+    .subject-grid {
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 1em;
+    }
+}
+
+@media (min-width: 1200px) {
+
+    .navbar-label {
+        display: inline;
+    }
+
+    .subject-grid {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+@media (min-width: 1400px) {
+
+    .subject-grid {
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    }
+}
+
+.text-glow {
+    -webkit-animation: glow 1s ease-in-out infinite alternate;
+    -moz-animation: glow 1s ease-in-out infinite alternate;
+    animation: glow 1s ease-in-out infinite alternate;
+}
+
+@-webkit-keyframes text-glow {
+    from {
+        text-shadow: 0 0 1px #fff, 0 0 2px #fff, 0 0 3px #e60073, 0 0 4px #e60073, 0 0 5px #e60073, 0 0 6px #e60073, 0 0 7px #e60073;
+    }
+
+    to {
+        text-shadow: 0 0 2px #fff, 0 0 3px #ff4da6, 0 0 4px #ff4da6, 0 0 5px #ff4da6, 0 0 6px #ff4da6, 0 0 7px #ff4da6, 0 0 8px #ff4da6;
+    }
+}
+
+.button-glow {
+    box-shadow: 0 0 0px 1px #ff1493, 0 0 1px 2px #ffc1dd;
+}
+
+.list-group-icon {
+    display: inline-block;
+    min-width: 1.5em;
+    font-size: larger;
+    text-align: center;
+}
+
+.list-group-icon-long {
+    display: inline-block;
+    min-width: 2.5em;
+    font-size: larger;
+    text-align: center;
+}
+
+.list-group-label {
+    font-size: larger;
+}

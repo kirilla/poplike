@@ -1,0 +1,82 @@
+﻿@page "/expressionset/remove/{id:int}"
+@model RemoveExpressionSetModel
+@{
+}
+
+@section Meta {
+    <title>
+        Ta bort svarsalternativ -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="Navbar/_Navbar" model="Model.PageUserToken" />
+}
+
+<main class="container">
+    <div class="row">
+        <div class="col-12 col-md-6">
+
+            @if (Model.Categories.Any())
+            {
+                <div class="alert alert-warning mt-3 mb-3">
+                    @(Model.ExpressionSet.Emoji)
+                    @(Model.ExpressionSet.Name)
+                    kan inte tas bort, eftersom de används av kategorierna:
+
+                    <ul class="list-unstyled mt-2 mb-0">
+                        @foreach (var category in Model.Categories)
+                        {
+                            <li>
+                                <a href="/category/show/@(category.Id)">
+                                    @(category.Name)
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            }
+
+            <h4 class="ms-2 mt-3 mb-3">
+                <i>
+                    ta bort
+                </i>
+
+                <span class="ms-2" style="font-size:smaller">
+                    <a href="/expressionset/show/@(Model.ExpressionSet.Id)"
+                       class="text-decoration-none">
+                        @(Model.ExpressionSet.Emoji)
+                        @(Model.ExpressionSet.Name)
+                    </a>
+                </span>
+            </h4>
+
+            <form method="post" role="form">
+
+                <div asp-validation-summary="All" class="col-12"></div>
+
+                <input type="hidden" asp-for="CommandModel.Id" />
+
+                <div class="form-check noselect ms-2 mb-4">
+                    <input asp-for="CommandModel.Confirmed" class="form-check-input" type="checkbox" />
+                    <label class="form-check-label" for="CommandModel_Confirmed">
+                        Ja, jag är säker
+                    </label>
+                </div>
+
+                <div class="mt-3">
+                    <a class="btn btn-outline-secondary me-2"
+                       href="/expressionset/show/@(Model.ExpressionSet.Id)">
+                        Avbryt
+                    </a>
+
+                    <button type="submit" class="btn btn-secondary me-2">
+                        Ta bort
+                    </button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</main>

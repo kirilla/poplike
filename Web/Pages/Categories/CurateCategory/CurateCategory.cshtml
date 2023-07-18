@@ -1,0 +1,182 @@
+﻿@page "/category/curate/{id:int}"
+@model CurateCategoryModel
+@{
+}
+
+@section Meta {
+    <title>@(Model.Category.Name) - @(Branding.WebsiteTitle)</title>
+}
+
+@section Header {
+    <partial name="Navbar/_Navbar" model="Model.PageUserToken" />
+}
+
+<main class="container">
+    <div class="row">
+        <div class="col-12 col-md-10 col-lg-8 col-xl-7 col-xxl-6">
+
+            <h4 class="ms-2 mt-3 mb-3">
+                <i>
+                    @(Model.Category.Name)
+                </i>
+                <span class="ms-2" style="font-size:smaller">
+                    <a href="/subject/all"
+                       class="text-decoration-none">
+                        ämnen
+                    </a>
+                </span>
+            </h4>
+
+            <div class="card">
+                <h5 class="ms-3 mt-2">
+                    Svarsalternativ
+                </h5>
+
+                <table class="table border-top mb-0">
+                    <tbody>
+                        @foreach (var expression in Model.Expressions)
+                        {
+                            <tr>
+                                <td>
+                                    <span class="col-12 ms-2">
+                                        @(expression.Characters)
+                                    </span>
+                                </td>
+                            </tr>
+                        }
+                        <tr>
+                            <td>
+                                <span class="col-12 ms-2">
+                                    <a href="/expressionset/all"
+                                       class="text-decoration-none">
+                                        visa andra
+                                   </a>
+
+                                    <a href="/category/edit/@(Model.Category.Id)"
+                                       class="text-decoration-none ms-2">
+                                        byt
+                                    </a>
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="card mt-3">
+                <h5 class="ms-3 mt-2">
+                    Kontakt
+                </h5>
+
+                <table class="table border-top mb-0">
+                    <tbody>
+                        @foreach (var contact in Model.CategoryContacts)
+                        {
+                            <tr>
+                                <td>
+                                    <ul class="list-unstyled ms-2 mb-0">
+                                        @if (!string.IsNullOrWhiteSpace(contact.Name))
+                                        {
+                                            <li>
+                                                @(contact.Name)
+                                            </li>
+                                        }
+                                        @if (!string.IsNullOrWhiteSpace(contact.PhoneNumber))
+                                        {
+                                            <li>
+                                                @(contact.PhoneNumber)
+                                            </li>
+                                        }
+                                        @if (!string.IsNullOrWhiteSpace(contact.EmailAddress))
+                                        {
+                                            <li>
+                                                @(contact.EmailAddress)
+                                            </li>
+                                        }
+                                        @if (!string.IsNullOrWhiteSpace(contact.Url))
+                                        {
+                                            <li>
+                                                <a href="@(contact.Url)">@(contact.Url)</a>
+                                            </li>
+                                        }
+                                    </ul>
+                                </td>
+                                <td class="col-3 text-end">
+                                    <a class="text-decoration-none me-2"
+                                       href="/category/editcontact/@(contact.Id)">
+                                        <span>✏️</span>
+                                    </a>
+                                    <a class="text-decoration-none me-2"
+                                       href="/category/removecontact/@(contact.Id)">
+                                        <span>❌</span>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+                <div class="list-group list-group-flush border-0">
+                    <a class="list-group-item"
+                       href="/category/@(Model.Category.Id)/addcontact">➕</a>
+                </div>
+            </div>
+
+            <div class="card mt-3">
+                <h5 class="ms-3 mt-2">
+                    Text
+                </h5>
+
+                <table class="table border-top mb-0">
+                    <tbody>
+                        @foreach (var blurb in Model.CategoryBlurbs)
+                        {
+                            <tr>
+                                <td>
+                                    <div class="ms-2">@(blurb.Text)</div>
+                                </td>
+                                <td class="col-3 text-end">
+                                    <a class="text-decoration-none me-2"
+                                       href="/category/editblurb/@(blurb.Id)">
+                                        <span>✏️</span>
+                                    </a>
+                                    <a class="text-decoration-none me-2"
+                                       href="/category/removeblurb/@(blurb.Id)">
+                                        <span>❌</span>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+                <div class="list-group list-group-flush border-0">
+                    <a class="list-group-item"
+                       href="/category/@(Model.Category.Id)/addblurb">➕</a>
+                </div>
+            </div>
+
+            <div class="card mt-4">
+                <div class="card-body">
+
+                    <a class="btn btn-outline-secondary me-2"
+                       href="/category/show/@(Model.Category.Id)">
+                        Avbryt
+                   </a>
+
+                    <a class="btn btn-danger me-2"
+                       href="/category/remove/@(Model.Category.Id)">
+                        Ta bort
+                    </a>
+
+                    <a class="btn btn-warning me-2"
+                       href="/category/edit/@(Model.Category.Id)">
+                        Redigera
+                    </a>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</main>

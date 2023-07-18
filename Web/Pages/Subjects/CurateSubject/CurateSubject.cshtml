@@ -1,0 +1,326 @@
+﻿@page "/subject/curate/{id:int}"
+@model CurateSubjectModel
+@{
+}
+
+@section Meta {
+    <title>
+        Redigera ämne - 
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="Navbar/_Navbar" model="Model.PageUserToken" />
+}
+
+<main class="container">
+    <div class="row">
+        <div class="col-12 col-md-10 col-lg-8 col-xl-7 col-xxl-6">
+
+            <h4 class="ms-2 mt-3 mb-3">
+                <i>
+                    @(Model.Subject.Name)
+                </i>
+                <span class="ms-2" style="font-size:smaller">
+                    <a href="/category/show/@(Model.Category.Id)"
+                       class="text-decoration-none">
+                        @(Model.Category.Name)
+                    </a>
+                </span>
+            </h4>
+
+            <div class="card mt-3">
+                <h5 class="ms-3 mt-2">
+                    Svarsalternativ
+                </h5>
+
+                <table class="table border-top mb-0">
+                    <tbody>
+                        @if (!Model.Statements.Any())
+                        {
+                            <tr>
+                                <td>
+                                    Inga
+                                </td>
+                            </tr>
+                        }
+
+                        @foreach (var statement in Model.Statements)
+                        {
+                            <tr>
+                                <td>
+                                    <span class="ms-2">
+                                        @(statement.Sentence)
+                                    </span>
+                                </td>
+                                <td class="col-3 text-end">
+
+                                    <form action="/statement/moveup/@(statement.Id)"
+                                          method="post" role="form" class="d-inline">
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="Id" value="@(statement.Id)" />
+                                        <button type="submit" class="">
+                                            🔼
+                                        </button>
+                                    </form>
+
+                                    <form action="/statement/movedown/@(statement.Id)"
+                                          method="post" role="form" class="d-inline">
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="Id" value="@(statement.Id)" />
+                                        <button type="submit" class="">
+                                            🔽
+                                        </button>
+                                    </form>
+                                </td>
+                                <td class="col-3 text-end">
+                                    @if (!statement.UserCreated)
+                                    {
+                                        <a class="text-decoration-none me-2"
+                                           href="/statement/edit/@(statement.Id)">
+                                            <span>✏️</span>
+                                        </a>
+                                    }
+                                    <a class="text-decoration-none me-2"
+                                       href="/statement/remove/@(statement.Id)">
+                                        <span>❌</span>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+                <div class="list-group list-group-flush border-0">
+                    <a class="list-group-item"
+                       href="/subject/@(Model.Subject.Id)/addstatement">➕</a>
+                </div>
+
+                <div class="card-footer">
+                    <a class="btn btn-outline-secondary me-2"
+                       href="/subject/changeExpressionSet/@(Model.Subject.Id)">
+                        Byt uppsättning svarsalternativ
+                    </a>
+
+                    <a class="btn btn-outline-secondary me-2"
+                       href="/subject/deletereactions/@(Model.Subject.Id)">
+                        Nollställ alla svar
+                    </a>
+                </div>
+            </div>
+
+            <div class="card mt-3">
+
+                <h5 class="ms-3 mt-2">
+                    Kontakt från
+                    <a href="/category/curate/@(Model.Category.Id)"
+                       class="text-decoration-none">
+                        kategorin
+                    </a>
+                </h5>
+
+                <table class="table border-top mb-0">
+                    <tbody>
+                        @foreach (var contact in Model.CategoryContacts)
+                        {
+                            <tr>
+                                <td>
+                                    <ul class="list-unstyled ms-2 mb-0">
+                                        @if (!string.IsNullOrWhiteSpace(contact.Name))
+                                        {
+                                            <li>
+                                                @(contact.Name)
+                                            </li>
+                                        }
+                                        @if (!string.IsNullOrWhiteSpace(contact.PhoneNumber))
+                                        {
+                                            <li>
+                                                @(contact.PhoneNumber)
+                                            </li>
+                                        }
+                                        @if (!string.IsNullOrWhiteSpace(contact.EmailAddress))
+                                        {
+                                            <li>
+                                                @(contact.EmailAddress)
+                                            </li>
+                                        }
+                                        @if (!string.IsNullOrWhiteSpace(contact.Url))
+                                        {
+                                            <li>
+                                                <a href="@(contact.Url)">@(contact.Url)</a>
+                                            </li>
+                                        }
+                                    </ul>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+                @if (!Model.CategoryContacts.Any())
+                {
+                    <div class="list-group list-group-flush border-0">
+                        <a class="list-group-item"
+                           href="#">Inga
+                        </a>
+                    </div>
+                }
+            </div>
+
+            <div class="card mt-3">
+                <h5 class="ms-3 mt-2">
+                    Kontakt
+                </h5>
+
+                <table class="table border-top mb-0">
+                    <tbody>
+                        @foreach (var contact in Model.SubjectContacts)
+                        {
+                            <tr>
+                                <td>
+                                    <ul class="list-unstyled ms-2 mb-0">
+                                        @if (!string.IsNullOrWhiteSpace(contact.Name))
+                                        {
+                                            <li>
+                                                @(contact.Name)
+                                            </li>
+                                        }
+                                        @if (!string.IsNullOrWhiteSpace(contact.PhoneNumber))
+                                        {
+                                            <li>
+                                                @(contact.PhoneNumber)
+                                            </li>
+                                        }
+                                        @if (!string.IsNullOrWhiteSpace(contact.EmailAddress))
+                                        {
+                                            <li>
+                                                @(contact.EmailAddress)
+                                            </li>
+                                        }
+                                        @if (!string.IsNullOrWhiteSpace(contact.Url))
+                                        {
+                                            <li>
+                                                <a href="@(contact.Url)">@(contact.Url)</a>
+                                            </li>
+                                        }
+                                    </ul>
+                                </td>
+                                <td class="col-3 text-end">
+                                    <a class="text-decoration-none me-2"
+                                       href="/subject/editcontact/@(contact.Id)">
+                                        <span>✏️</span>
+                                    </a>
+                                    <a class="text-decoration-none me-2"
+                                       href="/subject/removecontact/@(contact.Id)">
+                                        <span>❌</span>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+                <div class="list-group list-group-flush border-0">
+                    <a class="list-group-item"
+                       href="/subject/@(Model.Subject.Id)/addcontact">➕</a>
+                </div>
+            </div>
+
+            <div class="card mt-3">
+                <h5 class="ms-3 mt-2">
+                    Text
+                </h5>
+
+                <table class="table border-top mb-0">
+                    <tbody>
+                        @foreach (var blurb in Model.SubjectBlurbs)
+                        {
+                            <tr>
+                                <td>
+                                    <div class="ms-2">@(blurb.Text)</div>
+                                </td>
+                                <td class="col-3 text-end">
+                                    <a class="text-decoration-none me-2"
+                                       href="/subject/editblurb/@(blurb.Id)">
+                                        <span>✏️</span>
+                                    </a>
+                                    <a class="text-decoration-none me-2"
+                                       href="/subject/removeblurb/@(blurb.Id)">
+                                        <span>❌</span>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                
+                <div class="list-group list-group-flush border-0">
+                    <a class="list-group-item" 
+                       href="/subject/@(Model.Subject.Id)/addblurb">➕</a>
+                </div>
+            </div>
+
+            <div class="card mt-3">
+                <h5 class="ms-3 mt-2">
+                    Nyckelord
+                </h5>
+
+                <table class="table border-top mb-0">
+                    <tbody>
+                        @foreach (var keyword in Model.Keywords)
+                        {
+                            <tr>
+                                <td>
+                                    <div class="ms-2">@(keyword.Word)</div>
+                                </td>
+                                <td class="col-3 text-end">
+                                    <a class="text-decoration-none me-2"
+                                       href="/subject/editkeyword/@(keyword.Id)">
+                                        <span>✏️</span>
+                                    </a>
+                                    <a class="text-decoration-none me-2"
+                                       href="/subject/removekeyword/@(keyword.Id)">
+                                        <span>❌</span>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+                <div class="list-group list-group-flush border-0">
+                    <a class="list-group-item"
+                       href="/subject/@(Model.Subject.Id)/addkeyword">➕</a>
+                </div>
+            </div>
+
+            <div class="card mt-4">
+                <div class="card-body">
+
+                    <a class="btn btn-outline-secondary me-2"
+                       href="/subject/show/@(Model.Subject.Id)">
+                        Avbryt
+                   </a>
+
+                    <a class="btn btn-danger me-2"
+                       href="/subject/delete/@(Model.Subject.Id)">
+                        Ta bort
+                    </a>
+
+                    <a class="btn btn-warning me-2"
+                       href="/subject/edit/@(Model.Subject.Id)">
+                        Redigera
+                    </a>
+
+                    <a class="btn btn-secondary me-2"
+                       href="/subject/move/@(Model.Subject.Id)">
+                        Flytta
+                    </a>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</main>

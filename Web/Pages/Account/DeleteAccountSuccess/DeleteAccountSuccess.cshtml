@@ -1,0 +1,28 @@
+﻿@page "/account/farewell"
+@model DeleteAccountSuccessModel
+@{
+}
+
+@section Meta {
+    <title>
+        Tack för den här tiden! - 
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="Navbar/_Navbar" model="Model.PageUserToken" />
+}
+
+<main class="container">
+
+    <h4 class="ms-2 mt-3 mb-3">
+        Ditt konto är borttaget
+    </h4>
+    <h5 class="ms-4 mt-3 mb-3">
+        Välkommen tillbaka senare!
+        </h5>
+
+    <p class="ms-5 mt-4">👋</p>
+
+</main>

@@ -1,0 +1,176 @@
+﻿@page "/expressionset/show/{id:int}"
+@model ShowExpressionSetModel
+@{
+}
+
+@section Meta {
+    <title>
+        @(Model.ExpressionSet.Name) - 
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="Navbar/_Navbar" model="Model.PageUserToken" />
+}
+
+<main class="container">
+    <div class="row">
+        <div class="col-12 col-lg-10 col-xl-8 col-xxl-6">
+
+            <h4 class="ms-2 mt-3 mb-3">
+                @(Model.ExpressionSet.Emoji)
+                <i>
+                    @(Model.ExpressionSet.Name)
+                </i>
+
+                <span class="ms-2" style="font-size:smaller">
+                    <a href="/expressionset/all"
+                       class="text-decoration-none">
+                        svarsalternativ
+                    </a>
+                </span>
+            </h4>
+
+            <div class="card mt-3">
+                <table class="table mb-0">
+                    <tbody>
+                        @if (!Model.Expressions.Any())
+                        {
+                            <tr>
+                                <td>
+                                    Tomt.
+                                </td>
+                            </tr>
+                        }
+
+                        @foreach (var expression in Model.Expressions)
+                        {
+                            <tr>
+                                <td class="ms-3">
+                                    <span class="ms-2">
+                                        @(expression.Characters)
+                                    </span>
+                                </td>
+                                <td class="col-3 text-end">
+
+                                    <form action="/expression/moveup/@(expression.Id)" 
+                                        method="post" role="form" class="d-inline">
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="Id" value="@(expression.Id)" />
+                                        <button type="submit" class="">
+                                            🔼
+                                        </button>
+                                    </form>
+
+                                    <form action="/expression/movedown/@(expression.Id)"
+                                            method="post" role="form" class="d-inline">
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="Id" value="@(expression.Id)" />
+                                        <button type="submit" class="">
+                                            🔽
+                                        </button>
+                                    </form>
+
+                                    @*<a class="text-decoration-none me-2"
+                                        href="/expression/moveup/@(expression.Id)">
+                                        🔼
+                                    </a>
+                                    <a class="text-decoration-none me-2"
+                                        href="/expression/movedown/@(expression.Id)">
+                                        🔽
+                                    </a>*@
+                                </td>
+                                <td class="col-3 text-end">
+                                    <a class="text-decoration-none me-2"
+                                        href="/expression/edit/@(expression.Id)">
+                                        <span>✏️</span>
+                                    </a>
+                                    <a class="text-decoration-none me-2"
+                                        href="/expression/remove/@(expression.Id)">
+                                        <span>❌</span>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="mt-3 ps-3">
+                <p>
+                    @if (Model.ExpressionSet.MultipleChoice)
+                    {
+                        <span>✔️✔️</span>
+                        <span>Tillåt flera val</span>
+                    }
+                    else
+                    {
+                        <span>✔️</span>
+                        <span>Tillåt <u>inte</u> flera val</span>
+                    }
+                </p>
+                <p>
+                    @if (Model.ExpressionSet.FreeExpression)
+                    {
+                        <span>💬</span>
+                        <span>Tillåt egna svar</span>
+                    }
+                    else
+                    {
+                        <span>🤐</span>
+                        <span>Tillåt <u>inte</u> egna svar</span>
+                    }
+                </p>
+            </div>
+
+            <div class="mt-3">
+
+                <a class="btn btn-danger me-2"
+                    href="/expressionset/remove/@(Model.ExpressionSet.Id)">
+                    Ta bort
+                </a>
+
+                <a class="btn btn-warning me-2"
+                    href="/expressionset/edit/@(Model.ExpressionSet.Id)">
+                    Redigera
+                </a>
+
+                <a class="btn btn-outline-secondary me-2"
+                    href="/expression/add/@(Model.ExpressionSet.Id)">
+                    Lägg till ett uttryck
+                </a>
+
+            </div>
+
+            <h5 class="ms-2 mt-5 mb-3">
+                <i>
+                    kategorier som använder dessa
+                </i>
+            </h5>
+
+            <div class="list-group">
+                @foreach (var category in Model.Categories)
+                {
+                    <a href="/category/show/@(category.Id)"
+                        class="list-group-item list-group-item-action">
+                        <span class="list-group-icon">
+                            @(category.Emoji)
+                        </span>
+                        <span class="list-group-label ms-1">
+                            @(category.Name)
+                        </span>
+                    </a>
+                }
+
+                @if (!Model.Categories.Any())
+                {
+                    <a href="#" class="list-group-item list-group-item-action">
+                        Inga
+                    </a>
+                }
+            </div>
+
+        </div>
+    </div>
+</main>

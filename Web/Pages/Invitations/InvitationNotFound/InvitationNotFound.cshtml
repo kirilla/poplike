@@ -1,0 +1,35 @@
+﻿@page "/invitation/notfound"
+@model InvitationNotFoundModel
+@{
+}
+
+@section Meta {
+    <title>
+        Hittar inte inbjudan - 
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="Navbar/_Navbar" model="Model.PageUserToken" />
+}
+
+<main class="container">
+
+    <h4 class="ms-2 mt-3 mb-3">
+        hittar inte inbjudan 😞
+    </h4>
+
+    <div class="ms-4 mt-3 mb-3">
+        <i>
+            Inbjudan borta<br />
+            Tranor flyga söderut<br />
+            Festen är över<br />
+        </i>
+    </div>
+
+    <a href="/" class="btn btn-outline-secondary">
+        Tillbaka till startsidan
+    </a>
+
+</main>

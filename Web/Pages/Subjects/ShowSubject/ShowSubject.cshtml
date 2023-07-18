@@ -1,0 +1,176 @@
+﻿@page "/subject/show/{id:int}"
+@model ShowSubjectModel
+@{
+}
+
+@section Meta {
+    <title>@(Model.Subject.Name) - @(Branding.WebsiteTitle)</title>
+    <meta name="description" content="@(Model.Subject.Name)">
+    <meta name="keywords" content="@(Model.Subject.Name), @(Model.Subject.Category?.Name)">
+
+    <meta property="og:title" content="@(Model.Subject.Name)" />
+    <meta property="og:description" content="@(Branding.FacebookTitle) @(Model.Subject.Name)" />
+    <meta property="og:image" content="https://poplike.se/images/brokenheart.png" />
+}
+
+@section Header {
+    <partial name="Navbar/_Navbar" model="Model.PageUserToken" />
+}
+
+<main class="container">
+    <div class="col-12 col-md-10 col-lg-8 col-xl-7 col-xxl-6">
+
+        <h4 class="ms-2 mt-3 mb-3">
+            <i>
+                @Model.Subject.Name
+            </i>
+            <span class="ms-2" style="font-size:smaller">
+                <a href="/category/show/@(Model.Subject.CategoryId)"
+                   class="text-decoration-none">
+                    @(Model.Subject.Category.Name)
+                </a>
+            </span>
+        </h4>
+
+        <div class="card">
+            <div class="card-body pb-2">
+
+                @foreach (var statement in Model.StatementCounts)
+                {
+                    <div class="mb-2">
+                        <form action="/subject/togglestatement" method="post" role="form" class="mb-2 d-inline">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="StatementId" value="@(statement.StatementId)" />
+                            <input type="hidden" name="SubjectId" value="@(statement.SubjectId)" />
+                            <button type="submit" class="btn btn-outline-secondary @(statement.HasIt ? "button-glow" : "")"
+                                style="word-break:break-all">
+                                @(statement.Sentence)
+                                <span class="badge rounded-pill text-bg-light ms-2">@(statement.Count)</span>
+                            </button>
+                        </form>
+                    </div>
+                }
+
+                @if (Model.Subject.FreeExpression)
+                {
+                    <div class="mb-2">
+                        <a class="btn btn-outline-secondary mt-3 me-2"
+                           href="/subject/@(Model.Subject.Id)/adduserstatement">
+                            💬 Säg något om det
+                        </a>
+                    </div>
+                }
+
+                @foreach (var blurb in Model.CategoryBlurbs)
+                {
+                    <div class="mt-3">
+                        <span>@(blurb.Text)</span>
+                    </div>
+                }
+
+                @foreach (var blurb in Model.SubjectBlurbs)
+                {
+                    <div class="mt-3">
+                        <span>@(blurb.Text)</span>
+                    </div>
+                }
+
+                @foreach (var contact in Model.CategoryContacts)
+                {
+                    <ul class="list-unstyled mt-3 mb-0">
+                        @if (!string.IsNullOrWhiteSpace(contact.Name))
+                        {
+                            <li>
+                                <span class="fw-bold">@(contact.Name)</span>
+                            </li>
+                        }
+                        @if (!string.IsNullOrWhiteSpace(contact.PhoneNumber))
+                        {
+                            <li>
+                                @(contact.PhoneNumber)
+                            </li>
+                        }
+                        @if (!string.IsNullOrWhiteSpace(contact.EmailAddress))
+                        {
+                            <li>
+                                @(contact.EmailAddress)
+                            </li>
+                        }
+                        @if (!string.IsNullOrWhiteSpace(contact.Url))
+                        {
+                            <li>
+                                <a href="@(contact.Url)">@(contact.Url)</a>
+                            </li>
+                        }
+                    </ul>
+                }
+
+                @foreach (var contact in Model.SubjectContacts)
+                {
+                    <ul class="list-unstyled mt-3 mb-0">
+                        @if (!string.IsNullOrWhiteSpace(contact.Name))
+                        {
+                            <li>
+                                <span class="fw-bold">@(contact.Name)</span>
+                            </li>
+                        }
+                        @if (!string.IsNullOrWhiteSpace(contact.PhoneNumber))
+                        {
+                            <li>
+                                @(contact.PhoneNumber)
+                            </li>
+                        }
+                        @if (!string.IsNullOrWhiteSpace(contact.EmailAddress))
+                        {
+                            <li>
+                                @(contact.EmailAddress)
+                            </li>
+                        }
+                        @if (!string.IsNullOrWhiteSpace(contact.Url))
+                        {
+                            <li>
+                                <a href="@(contact.Url)">@(contact.Url)</a>
+                            </li>
+                        }
+                    </ul>
+                }
+
+            </div>
+        </div>
+
+        @if (Model.UserToken.IsCurator)
+        {
+            <div class="list-group mt-3">
+                <a href="/subject/curate/@(Model.Subject.Id)"
+                   class="list-group-item list-group-item-action">
+                    <span class="list-group-icon">
+                        ✏️
+                    </span>
+                    <span class="list-group-label ms-1">
+                        redigera ämnet
+                    </span>
+                </a>
+            </div>
+        }
+
+        @if (Model.UserSubjectStatements.Any())
+        {
+            <div class="alert alert-warning mt-3">
+
+                <h5 class="mb-1">
+                    Historik
+                </h5>
+
+                @foreach (var statement in Model.UserSubjectStatements)
+                {
+                    <div>
+                        <a href="/user/show/@statement.UserId">@statement.UserName</a>
+                        <span class="text-muted">@statement.Created.ToFixedFormatDate()</span>
+                        @statement.Sentence
+                    </div>
+                }
+            </div>
+        }
+    
+    </div>
+</main>

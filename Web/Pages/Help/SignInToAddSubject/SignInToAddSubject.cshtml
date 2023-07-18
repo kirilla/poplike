@@ -1,0 +1,40 @@
+﻿@page "/help/signintoaddsubject"
+@model SignInToAddSubjectModel
+@{
+}
+
+@section Meta {
+    <title>
+        Logga in för att ... -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="Navbar/_Navbar" model="Model.PageUserToken" />
+}
+
+<main class="container">
+
+    <h4 class="ms-2 mt-3 mb-2">
+        <i>
+            logga in för att ...
+        </i>
+    </h4>
+
+    <div class="row">
+        <div class="col-12 col-lg-6">
+            <div class="alert alert-warning mt-3">
+                🤫 Ssh, inte prata.
+            </div>
+
+            <p class="mt-3 ms-2">
+                <a href="/session/signin" class="text-link alert-link">
+                    logga in, ögonaböj
+                </a>
+            </p>
+
+        </div>
+    </div>
+
+</main>

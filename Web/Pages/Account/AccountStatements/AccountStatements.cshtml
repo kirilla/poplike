@@ -1,0 +1,79 @@
+﻿@page "/account/statements"
+@model AccountStatementsModel
+@{
+}
+
+@section Meta {
+    <title>Dina kommentarer - @(Branding.WebsiteTitle)</title>
+}
+
+@section Header {
+    <partial name="Navbar/_Navbar" model="Model.PageUserToken" />
+}
+
+<main class="container">
+    <div class="row">
+        <div class="col-12 col-md-10 col-lg-8 col-xl-8">
+
+            <h4 class="ms-2 mt-3 mb-3">
+                <i>
+                    dina kommentarer
+                </i>
+            </h4>
+
+            <div class="card">
+                <div class="card-body">
+
+                    @if (Model.UserStatements.Any())
+                    {
+                        <table class="table table-sm caption-top">
+                            <thead>
+                                <tr>
+                                    <th scope="col">
+                                        Ämne
+                                    </th>
+                                    <th scope="col">
+                                        Datum
+                                    </th>
+                                    <th scope="col">
+                                        Kommentar
+                                    </th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var statement in Model.UserStatements)
+                                {
+                                    <tr>
+                                        <td>
+                                            <a href="/subject/show/@(statement.Statement.SubjectId)">
+                                                @(statement.Statement.Subject.Name)
+                                            </a>
+                                        </td>
+                                        <td>@(statement.Created.ToFixedFormatDate())</td>
+                                        <td>
+                                            <a href="/subject/show/@(statement.Statement.SubjectId)"
+                                               class="text-decoration-none">@(statement.Statement.Sentence)</a>
+                                        </td>
+                                        <td>
+                                            <a href="/subject/deletestatement/@(statement.Id)"
+                                               class="text-decoration-none me-2">🗙</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+
+                    @if (!Model.UserStatements.Any())
+                    {
+                        <p>
+                            Du har inga.
+                        </p>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

@@ -1,0 +1,19 @@
+﻿@model User
+<span>
+    @if (Model.IsAdmin)
+    {
+        @(Branding.AdminEmoji)
+    }
+    else if (Model.IsModerator)
+    {
+        @(Branding.ModeratorEmoji)
+    }
+    else if (Model.IsCurator)
+    {
+        @(Branding.CuratorEmoji)
+    }
+    else
+    {
+       @(Branding.UserEmoji) 
+    }
+</span>

@@ -1,0 +1,46 @@
+﻿@page "/subject/deletestatement/{id:int}"
+@model DeleteUserStatementModel
+@{
+}
+
+@section Meta {
+    <title>
+        Ta bort kommentar - 
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="Navbar/_Navbar" model="Model.PageUserToken" />
+}
+
+<main class="container">
+    <div class="col-12">
+
+        <h4 class="ms-2 mt-3 mb-3">
+            Vill du ta bort din kommentar
+            @(Model.CommandModel.Sentence)
+            om ämnet
+            @(Model.CommandModel.SubjectName)?
+        </h4>
+
+        <form method="post" role="form">
+
+            <input type="hidden" asp-for="CommandModel.UserStatementId" />
+
+            <div asp-validation-summary="All"></div>
+
+            <div class="mt-2">
+                <a role="button" class="btn btn-outline-secondary me-2"
+                   href="/account/statements">
+                    Avbryt
+                </a>
+
+                <button type="submit" class="btn btn-danger me-2">
+                    Ta bort
+                </button>
+            </div>
+
+        </form>
+    </div>
+</main>

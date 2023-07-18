@@ -1,0 +1,68 @@
+﻿@page "/add/something"
+@model AddSomethingModel
+@{
+}
+
+@section Meta {
+    <title>
+        Lägg till - 
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Style {
+
+}
+
+@section Header {
+    <partial name="Navbar/_Navbar" model="Model.PageUserToken" />
+}
+
+<main class="container">
+    <div class="row">
+        <div class="col-12 col-md-8">
+
+            <h4 class="ms-2 mt-3 mb-3">
+                <i>
+                    lägg till ...
+                </i>
+            </h4>
+
+            <div class="mt-3 col-12 col-md-8">
+
+                <div class="list-group">
+                    @foreach (var category in Model.Categories)
+                    {
+                        <a href="/subject/add/@(category.Id)"
+                           class="list-group-item list-group-item-action">
+                            <span class="list-group-icon">
+                                @(category.Emoji)
+                            </span>
+                            <span class="list-group-label ms-1">
+                                @(category.Name)
+                            </span>
+                        </a>
+                    }
+                </div>
+
+                @if (Model.UserToken.IsCurator)
+                {
+                    <div class="list-group mt-4">
+                        <a href="/category/add"
+                           class="list-group-item list-group-item-action">
+                            <span class="list-group-icon">
+                                ➕
+                            </span>
+                            <span class="list-group-label ms-1">
+                                ny kategori
+                            </span>
+                        </a>
+                    </div>
+                }
+
+            </div>
+
+        </div>
+    </div>
+
+</main>

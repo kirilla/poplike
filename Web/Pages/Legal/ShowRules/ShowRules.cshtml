@@ -1,0 +1,95 @@
+﻿@page "/legal/rules"
+@model ShowRulesModel
+@{
+}
+
+@section Meta {
+    <title>
+        Regler - 
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="Navbar/_Navbar" model="Model.PageUserToken" />
+}
+
+<main class="container">
+    <div class="row">
+        <div class="col-12 col-lg-10 col-xl-8 col-xxl-6">
+
+            <h4 class="ms-2 mt-3 mb-3">
+                <i>regler</i>
+            </h4>
+
+            @foreach (var rule in Model.Rules)
+            {
+                <div class="card mb-3">
+                    <table class="table table-borderless mb-0">
+                        <tbody>
+                            <tr>
+                                <td class="col-1">
+                                    <h5 class="ms-2 mb-0">
+                                        @(rule.Number)
+                                    </h5>
+                                </td>
+                                <td class="col-8">
+                                    <h5 class="mb-0">
+                                        @(rule.Heading)
+                                    </h5>
+                                </td>
+                                <td class="col-3 text-end">
+                                    <span class="me-2">
+                                    @if (Model.UserToken.CanEditRule())
+                                    {
+                                        <a href="/rule/edit/@(rule.Id)"
+                                           class="text-decoration-none me-2">
+                                            <span>✏️</span>
+                                        </a>
+                                    }
+
+                                    @if (Model.UserToken.CanRemoveRule())
+                                    {
+                                        <a href="/rule/remove/@(rule.Id)"
+                                           class="text-decoration-none me-2">
+                                            <span>❌</span>
+                                        </a>
+                                    }
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                </td>
+                                <td colspan="2">
+                                    <span>
+                                        @(rule.Text)
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            }
+
+            @if (Model.UserToken.CanAddRule())
+            {
+
+                <div class="list-group">
+                    <a class="list-group-item list-group-item-action"
+                       href="/rule/add">
+                        <span class="list-group-icon">
+                            ➕
+                        </span>
+                        <span class="list-group-label ms-1">
+                            ny regel
+                        </span>
+                   </a>
+                </div>
+            }
+
+        </div>
+    </div>
+
+</main>

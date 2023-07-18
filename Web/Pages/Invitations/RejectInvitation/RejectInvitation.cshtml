@@ -1,0 +1,37 @@
+﻿@page "/invitation/reject/{guid:guid}"
+@model RejectInvitationModel
+@{
+}
+
+@section Meta {
+    <title>
+        Tacka nej? - 
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="Navbar/_Navbar" model="Model.PageUserToken" />
+}
+
+<main class="container">
+    <div class="col-12 col-md-6">
+
+        <h4 class="ms-2 mt-3 mb-4">
+            <i>
+                tackar du nej till inbjudan
+            </i>
+        </h4>
+
+        <form method="post" role="form">
+            <input asp-for="CommandModel.Guid" type="hidden" />
+
+            <div class="mt-2">
+                <button type="submit" class="btn btn-primary">
+                    Tacka nej
+                </button>
+            </div>
+        </form>
+
+    </div>
+</main>

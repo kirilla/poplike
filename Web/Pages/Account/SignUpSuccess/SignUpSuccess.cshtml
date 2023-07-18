@@ -1,0 +1,31 @@
+﻿@page "/account/signupsuccess"
+@model SignUpSuccessModel
+@{
+}
+
+@section Meta {
+    <title>
+        Klart! - 
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="Navbar/_Navbar" model="Model.PageUserToken" />
+}
+
+<main class="container">
+
+    <h4 class="ms-2 mt-3 mb-3"><i>
+            ansökan mottagen
+    </i></h4>
+
+    <p>
+        En inbjudan kommer till din epostadress inom några minuter.
+    </p>
+
+    <a href="/" class="btn btn-primary">
+        Till startsidan
+    </a>
+
+</main>

@@ -1,0 +1,73 @@
+﻿@page "/subject/{id:int}/addstatement"
+@model AddStatementModel
+@{
+}
+
+@section Meta {
+    <title>
+        Nytt uttryck - 
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="Navbar/_Navbar" model="Model.PageUserToken" />
+}
+
+<main class="container">
+    <div class="row">
+        <div class="col-12 col-md-6">
+
+            <h4 class="ms-2 mt-3 mb-3">
+                <i>
+                    lägg till ett uttryck
+                </i>
+
+                <span class="ms-2" style="font-size:smaller">
+                    <a href="/subject/curate/@(Model.Subject.Id)"
+                       class="text-decoration-none">
+                        @(Model.Subject.Category.Emoji)
+                        @(Model.Subject.Name)
+                    </a>
+                </span>
+            </h4>
+
+            <form method="post" role="form">
+                <input type="hidden" asp-for="CommandModel.SubjectId" />
+
+                <div asp-validation-summary="All" class="col-12"></div>
+
+                <input asp-for="CommandModel.Sentence" class="form-control mt-3"
+                       placeholder="Emoji, ord eller ordbild" />
+
+                <div class="mt-3">
+                    <a class="btn btn-outline-secondary me-2"
+                       href="/subject/curate/@(Model.Subject.Id)">
+                        Avbryt
+                    </a>
+
+                    <button type="submit" class="btn btn-secondary ms-auto">
+                        Spara
+                    </button>
+                </div>
+            </form>
+
+            <div class="card mt-5">
+                <div class="card-body">
+
+                    <h5 class="">Hitta fler</h5>
+
+                    <p class="mb-0">
+                        <a href="https://emojipedia.org/sv/" target="_blank">Emojipedia</a>
+                        <br />
+                        <a href="https://emoticoncentral.com/" target="_blank">Emoticon Central</a>
+                        <br />
+                        <a href="https://emojikeyboard.io/" target="_blank">Emoji Keyboard</a>
+                    </p>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</main>
