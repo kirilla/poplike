@@ -25,3 +25,12 @@
 * Publish
 * Try to access the website.
 * Tweak settings to turn on/off the user account creation features. (Sign up, Register account, Sign in, etc)
+
+## Account creation ##
+* There are two ways to create an account: SignUp and RegisterAccount.
+* In the SignUp operation, the user provides only the email address, after which an email invitation is mailed out. This ensures the signup is intentional, and that the users is actually in possession of the given address.
+* In the RegisterAccount the user actually creates the account directly, in a single step, without any email.
+* For the initial Admin account, it may be best to use the RegisterAccount method (see appsettings for how to enable it) to avoid potential issues with the email settings used for the mailout in the SignUp operation.
+* The way to make the initial Admin account is to first create the user (by the RegisterAccount or SignUp operation) and then to manually flip the Admin bit on that particular User in the database.
+
+  
