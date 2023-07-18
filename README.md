@@ -22,7 +22,7 @@
 * Build the project with the "Remote" config.
 * Run the database migration to create the production database.
 * Try to run the web application locally with the "Remote" build configuration, against the production database.
-* Set up a publishing profile, e.g. by using publish settings from your web hotel.
+* Set up a publishing profile, e.g. by using publish settings from your web hotel. Use the 'Production' build config.
 * Publish
 * Try to access the website.
 * Tweak settings to turn on/off the user account creation features. (Sign up, Register account, Sign in, etc)
