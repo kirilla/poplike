@@ -1,9 +1,10 @@
 # poplike
 
 ## What is it? ##
-* A simple voting platform, with items to vote or comment on.
+* A simple voting website, with items to vote or comment on.
 * Items are grouped in categories.
 * Users can see a list of all existing items.
+* You can link to items from e.g. Facebook, to push traffic to a certain vote.
 
 ## Live examples ##
 * [poplike.se](https://poplike.se)
@@ -21,7 +22,7 @@
 * Build the project with the "Remote" config.
 * Run the database migration to create the production database.
 * Try to run the web application locally with the "Remote" build configuration, against the production database.
-* Set up a publishing profile, e.g. by using publish settings from your web hotel.
+* Set up a publishing profile, e.g. by using publish settings from your web hotel. Use the 'Production' build config.
 * Publish
 * Try to access the website.
 * Tweak settings to turn on/off the user account creation features. (Sign up, Register account, Sign in, etc)
