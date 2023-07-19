@@ -50,7 +50,7 @@ public class RegisterAccountEmailTemplate : IRegisterAccountEmailTemplate
             </style>
             </head>
             <body style="background-color:white">
-                <h4>Hej fÖrNAmn EftErnaMn!</h4>
+                <h4>Hej {user.Name}!</h4>
                 <p>
                     Ett konto har skapats på
                     <a href="https://poplike.se/">Poplike.se</a>
@@ -69,7 +69,7 @@ public class RegisterAccountEmailTemplate : IRegisterAccountEmailTemplate
     private string CreateTextBody(User user)
     {
         return $"""
-            Hej fÖrNAmn EftErnaMn!
+            Hej {user.Name}!
 
             Ett konto har skapats på
             https://poplike.se/
