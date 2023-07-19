@@ -14,10 +14,6 @@
                 .IsRequired()
                 .HasMaxLength(MaxLengths.Common.Email.Address);
 
-            builder.Property(p => p.PhoneNumber)
-                .IsRequired()
-                .HasMaxLength(MaxLengths.Common.Phone.Number);
-
             builder.HasMany(x => x.PasswordResetRequests)
                 .WithOne(x => x.User)
                 .HasForeignKey(x => x.UserId);
@@ -31,7 +27,6 @@
                 .HasForeignKey(x => x.UserId);
 
             builder.HasIndex(p => p.EmailAddress).IsUnique();
-            builder.HasIndex(p => p.PhoneNumber).IsUnique();
         }
     }
 }

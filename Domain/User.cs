@@ -8,7 +8,6 @@ public class User :
     public string Name { get; set; }
 
     public string EmailAddress { get; set; }
-    public string PhoneNumber { get; set; }
 
     public string PasswordHash { get; set; }
 
@@ -32,7 +31,6 @@ public class User :
     public void FormatOnSave()
     {
         EmailAddress = EmailAddress.Trim().ToLowerInvariant();
-        PhoneNumber = PhoneNumber.StripNonNumeric();
     }
 
     public void ValidateOnSave()

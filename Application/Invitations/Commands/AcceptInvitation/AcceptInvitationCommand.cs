@@ -41,17 +41,12 @@ public class AcceptInvitationCommand : IAcceptInvitationCommand
             x.EmailAddress == invitation.SignUp.EmailAddress))
             throw new EmailAlreadyTakenException();
 
-        if (await _database.Users.AnyAsync(x =>
-            x.PhoneNumber == model.PhoneNumber))
-            throw new PhoneNumberAlreadyTakenException();
-
         await _filter.Filter(model.Name);
 
         var user = new User()
         {
             Name = model.Name,
             EmailAddress = invitation.SignUp.EmailAddress,
-            PhoneNumber = model.PhoneNumber,
             IsHidden = model.IsHidden,
             Guid = Guid.NewGuid(),
         };

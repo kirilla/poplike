@@ -95,14 +95,6 @@ public class AcceptInvitationModel : UserTokenPageModel
 
             return Page();
         }
-        catch (PhoneNumberAlreadyTakenException)
-        {
-            ModelState.AddModelError(
-                nameof(CommandModel.PhoneNumber),
-                "Numret används redan av en annan användare.");
-
-            return Page();
-        }
         catch (WordPreventedException)
         {
             ModelState.AddModelError(

@@ -11,10 +11,6 @@ public class AcceptInvitationCommandModel
     [StringLength(MaxLengths.Domain.User.Name)]
     public string Name { get; set; }
 
-    [RegularExpression(Pattern.Common.SomeContent)]
-    [StringLength(MaxLengths.Common.Phone.Number)]
-    public string PhoneNumber { get; set; }
-
     [StringLength(MaxLengths.Domain.User.Password)]
     public string Password { get; set; }
 
