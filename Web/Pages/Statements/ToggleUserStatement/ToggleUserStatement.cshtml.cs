@@ -36,6 +36,10 @@ public class ToggleUserStatementModel : UserTokenPageModel
 
             return Redirect($"/subject/show/{CommandModel.SubjectId}");
         }
+        catch (NotPermittedException)
+        {
+            return Redirect("/help/signintodothis");
+        }
         catch
         {
             return Redirect($"/subject/show/{CommandModel.SubjectId}");
