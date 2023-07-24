@@ -61,6 +61,7 @@ public class ToggleUserStatementCommand : IToggleUserStatementCommand
             {
                 var otherUserStatements = await _database.UserStatements
                     .Where(x =>
+                        x.UserId == userToken.UserId!.Value &&
                         x.Statement.SubjectId == statement.SubjectId &&
                         x.StatementId != statement.Id)
                     .ToListAsync();
