@@ -72,6 +72,14 @@ public class EditSubjectModel : UserTokenPageModel
 
             return Redirect($"/subject/curate/{CommandModel.Id}");
         }
+        catch (BlockedByExistingException)
+        {
+            ModelState.AddModelError(
+                nameof(CommandModel.Name),
+                "Det här finns redan.");
+
+            return Page();
+        }
         catch (WordPreventedException)
         {
             ModelState.AddModelError(

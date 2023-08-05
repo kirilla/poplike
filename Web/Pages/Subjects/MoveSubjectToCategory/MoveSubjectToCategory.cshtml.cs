@@ -82,6 +82,14 @@ public class MoveSubjectToCategoryModel : UserTokenPageModel
 
             return Redirect($"/subject/curate/{CommandModel.Id}");
         }
+        catch (BlockedByExistingException)
+        {
+            ModelState.AddModelError(
+                nameof(CommandModel.CategoryId),
+                "Det finns redan ett ämne med samma namn i kategorin.");
+
+            return Page();
+        }
         catch
         {
             return Redirect("/help/notpermitted");

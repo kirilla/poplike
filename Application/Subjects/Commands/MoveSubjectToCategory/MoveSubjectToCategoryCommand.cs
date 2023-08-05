@@ -19,6 +19,13 @@ public class MoveSubjectToCategoryCommand : IMoveSubjectToCategoryCommand
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
+        if (await _database.Subjects
+            .Where(x =>
+                x.Name == subject.Name &&
+                x.CategoryId == model.CategoryId!.Value)
+            .AnyAsync())
+            throw new BlockedByExistingException();
+
         subject.CategoryId = model.CategoryId!.Value;
 
         await _database.SaveAsync(userToken);

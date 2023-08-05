@@ -28,6 +28,13 @@ public class EditSubjectCommand : IEditSubjectCommand
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
+        if (await _database.Subjects
+            .Where(x =>
+                x.Name == model.Name &&
+                x.CategoryId == subject.CategoryId)
+            .AnyAsync())
+            throw new BlockedByExistingException();
+
         subject.Name = model.Name;
 
         subject.MultipleChoice = model.MultipleChoice;

@@ -34,7 +34,9 @@ public class AddSubjectCommand : IAddSubjectCommand
             throw new NotFoundException();
 
         if (await _database.Subjects
-                .Where(x => x.Name == model.Name)
+                .Where(x =>
+                    x.Name == model.Name &&
+                    x.CategoryId == category.Id)
                 .AnyAsync())
             throw new BlockedByExistingException();
 
