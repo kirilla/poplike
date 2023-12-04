@@ -7,8 +7,7 @@
 * You can link to items from e.g. Facebook, to push traffic to a certain vote.
 
 ## Live examples ##
-* [poplike.se](https://poplike.se)
-* [tyckomuppsala.se](https://tyckomuppsala.se) (in Swedish)
+* REDACTED
 
 ## Getting started ##
 * Find a web host with support for ASP.net Core and SQL Server
